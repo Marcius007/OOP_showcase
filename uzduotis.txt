@@ -1,0 +1,33 @@
+
+Užduotis.
+
+Reikia sukurti knygų bilbioteką (kalbame apie fizinę biblioteką, kurioje einame pasiskolinti knygų. Tai tam tikra knygų kolekcija. Bibliotekoje gali būti kelios kopijos tos pačios knygos.
+Viena knygos kopija gali būti arba "Pasiekiama" (t.y. yra bibliotekos pastate) arba "Paimta" (t.y. pasiskolinta)
+
+
+Reikalingi Bibliotekos metodai. @param - metodo parametras. @return - ką metodas turi grąžinti.
+
+0. Sukurti knygą.
+    """@param Pavadinimas. Knygos pavadinimas. Tekstas
+       @param Autoriaus vardas pavardė. Tekstas
+       @param Metai. Kada knyga buvo publikuota, pvz 2010  """
+
+1. Nusipirkti naują knygos kopiją ir ją įdėti į bibliotekos kolekciją.
+    """@param Knyga. Tipas - klasė.
+       @return Gražinama nauja knyga """
+
+2. Pasiskolinti knygos kopiją iš bibliotekos. Leidžia pasiimti knygos kopiją, jeigu tokia yra.
+    """@param Knyga. Tipas - klasė."""
+
+3. Grąžinti knygos kopiją į biblioteką. Leidžia grąžinti knygos kopiją, kad ji vėl taptu "Pasiekiama".
+    """@param Knyga. Tipas - klasė."""
+
+4.  Rasti knygos kopiją
+    """@param Paieškos tekstas
+       @return Knygos kopijų sąrašas pagal gautą tekstą (ir "Pasiekiamos" ir "Paimtos"). Viena knygos kopija turi būti atvaizduojama tik vieną kartą.
+       Paieška turi palaikyti:
+           - Tikslią paiešką pagal autorių arba pavadinimą.
+           - Rikiavimą pagal datą. Jeigu yra dvi vienodos knygos tik  su skirtingais publikavimo metais. Naujausia knygos kopija turi būti atvaizduojama pirmiau """
+
+Gaunate labai daug bonus taškų už unit testus.
+Interpretuoti galite laisvai. Esmė yra pamatyti, kad išeina dirbti su objektiniu programavimu. 
