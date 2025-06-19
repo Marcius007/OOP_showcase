@@ -4,36 +4,40 @@ from src.services.books_service import Book
 
 
 class Library:
-
     def __init__(self):
-        self.books: List[Book] = []
+        self._books: List[Book] = []
 
-    def __repr__(self):
-        return "\n".join(str(book) for book in self.books)
+    def __repr__(self) -> str:
+        return "\n".join(str(book) for book in self._books)
 
-    def add_book(self, book: Book) -> Book:
-        self.books.append(book)
-        return book
+    def add_book(self, book: Book) -> None:
+        self._books.append(book)
 
-    def get_book(self, requested_book: Book):
-        for book in self.books:
-            if requested_book == book and book.is_available():
+    def borrow_book(self, requested_book: Book) -> bool:
+        """Attempts to borrow a book. Returns True if successful."""
+        for book in self._books:
+            if book == requested_book and book.is_available():
                 book.set_unavailable()
-                print("Book borrowed successfully.")
-                return
-        print("Book not available.")
+                return True
+        return False
 
-    def return_book(self, requested_book: Book):
-        for book in self.books:
-            if requested_book == book and book.is_unavailable():
+    def return_book(self, requested_book: Book) -> bool:
+        """Attempts to return a book. Returns True if successful."""
+        for book in self._books:
+            if book == requested_book and book.is_unavailable():
                 book.set_available()
-                print("Book returned successfully.")
-                return
-        print("Book was not borrowed.")
+                return True
+        return False
 
-    def get_book_by_search(self, text: str) -> List[Book]:
-        found_books = []
-        for book in self.books:
-            if (book.author == text or book.name == text) and book not in found_books:
-                found_books.append(book)
-        return sorted(found_books, key=lambda x: x.year, reverse=True)
+    def search_books(self, query: str) -> List[Book]:
+        """Returns a list of books matching the title or author."""
+        matched = [
+            book for book in self._books
+            if book.name == query or book.author == query
+        ]
+        return sorted(matched, key=lambda b: b.year, reverse=True)
+
+    @property
+    def books(self) -> List[Book]:
+        """Read-only access to the book list."""
+        return list(self._books)

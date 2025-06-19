@@ -1,4 +1,3 @@
-# === Main program ===
 from services.books_service import Book, BookStatus
 from services.library_service import Library
 
@@ -21,7 +20,7 @@ while True:
 
     elif command == "get":
         book = prompt_book()
-        library.get_book(book)
+        library.borrow_book(book)
 
     elif command == "return":
         book = prompt_book()
@@ -30,7 +29,7 @@ while True:
 
     elif command == "search":
         text = input("Enter book title or author: ").strip()
-        results = library.get_book_by_search(text)
+        results = library.search_books(text)
         if results:
             print("Found books:")
             for b in results:

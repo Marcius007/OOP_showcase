@@ -8,34 +8,36 @@ class TestLibrary(unittest.TestCase):
     def setUp(self):
         self.library = Library()
         self.book1 = Book("Book One", "Author A", 2001)
-        self.book2 = Book("Book One", "Author A", 2001)  # same as book1
+        self.book2 = Book("Book One", "Author A", 2001)
         self.book3 = Book("Book Two", "Author B", 2005)
 
     def test_add_book(self):
         self.library.add_book(self.book1)
         self.assertIn(self.book1, self.library.books)
+        assert len(self.library.books) == 1
 
     def test_get_book_available(self):
         self.library.add_book(self.book1)
-        self.library.get_book(self.book2)  # same details as book1
+        self.library.borrow_book(self.book2)
         self.assertEqual(self.library.books[0].status, BookStatus.UNAVAILABLE)
 
     def test_get_book_unavailable(self):
         self.library.add_book(self.book1)
-        self.library.get_book(self.book2)
-        self.library.get_book(self.book2)  # second time, should not find available
+        self.library.borrow_book(self.book2)
+        self.library.borrow_book(self.book2)
         self.assertEqual(self.library.books[0].status, BookStatus.UNAVAILABLE)
 
     def test_return_book(self):
         self.library.add_book(self.book1)
-        self.library.get_book(self.book1)
+        self.library.borrow_book(self.book1)
+        self.assertEqual(self.library.books[0].status, BookStatus.UNAVAILABLE)
         self.library.return_book(self.book1)
         self.assertEqual(self.library.books[0].status, BookStatus.AVAILABLE)
 
     def test_search_books(self):
         self.library.add_book(self.book1)
         self.library.add_book(self.book3)
-        results = self.library.get_book_by_search("Book One")
+        results = self.library.search_books("Book One")
         self.assertEqual(len(results), 1)
         self.assertEqual(results[0].name, "Book One")
 
