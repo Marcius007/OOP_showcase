@@ -1,4 +1,3 @@
-import datetime
 from typing import List
 
 from services.books_service import Book
@@ -6,6 +5,7 @@ from services.books_service import Book
 
 class Library:
     DAYS_TO_RETURN: int = 7
+
     def __init__(self):
         self._books: List[Book] = []
 
@@ -20,7 +20,7 @@ class Library:
         for book in self._books:
             if requested_book == book and book.is_available():
                 book.set_unavailable()
-                book.return_date = datetime.datetime.today()+datetime.timedelta(days=self.DAYS_TO_RETURN)
+                book.set_return_date(self.DAYS_TO_RETURN)
                 print("Book borrowed successfully.")
                 return
         print("Book not available.")
@@ -29,7 +29,7 @@ class Library:
         for book in self._books:
             if requested_book == book and book.is_unavailable():
                 book.set_available()
-                book.return_date = None
+                book.set_return_date(None)
                 print("Book returned successfully.")
                 return
         print("Book was not borrowed.")
