@@ -1,7 +1,7 @@
 import unittest
 
-from src.services.books_service import BookStatus
-from src.services.library_service import Book, Library
+from src.services.books_service import Book, BookStatus
+from src.services.library_service import Library
 
 class TestLibrary(unittest.TestCase):
 

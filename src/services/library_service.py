@@ -1,6 +1,6 @@
 from typing import List
 
-from src.services.books_service import Book
+from services.books_service import Book
 
 
 class Library:
